@@ -4,14 +4,14 @@ import { useInventory } from "../../hooks/useInventory";
 import AddPartModal from "../../components/admin/AddPartModal"; // ← import karo
 
 const S = {
-  title: { fontSize: 20, fontWeight: 500, color: "white", marginBottom: 4 },
-  sub: { fontSize: 13, color: "#ffffff60", marginBottom: 20 },
-  card: { background: "#1a1f2e", border: "0.5px solid #ffffff15", borderRadius: 12, padding: 18 },
+  title: { fontSize: 20, fontWeight: 500, color: "black", marginBottom: 4 },
+  sub: { fontSize: 13, color: "#00000060", marginBottom: 20 },
+  card: { background: "#ffffff", border: "1.5px solidrgba(14, 3, 3, 0.08)5", borderRadius: 12, padding: 18 },
   toolbar: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 },
-  search: { background: "#0f1117", border: "0.5px solid #ffffff30", borderRadius: 6, padding: "6px 12px", color: "white", fontSize: 12, width: 220 },
+  search: { background: "#e7eaf1", border: "0.5px solid #08010130", borderRadius: 6, padding: "6px 12px", color: "black", fontSize: 12, width: 220 },
   btn: (bg) => ({ background: bg, color: "white", border: "none", padding: "6px 14px", borderRadius: 6, fontSize: 12, cursor: "pointer" }),
-  th: { textAlign: "left", padding: "8px 12px", color: "#ffffff60", fontSize: 11, fontWeight: 500, borderBottom: "0.5px solid #ffffff15" },
-  td: { padding: "10px 12px", color: "white", fontSize: 12, borderBottom: "0.5px solid #ffffff10" },
+  th: { textAlign: "left", padding: "8px 12px", color: "#00000060", fontSize: 11, fontWeight: 500, borderBottom: "0.5px solid #ffffff15" },
+  td: { padding: "10px 12px", color: "black", fontSize: 12, borderBottom: "0.5px solid #00000010" },
   badge: (color, bg) => ({ fontSize: 10, padding: "2px 8px", borderRadius: 4, color, background: bg }),
 };
 
@@ -34,7 +34,7 @@ export default function InventoryPage() {
   return (
     <AdminLayout>
       <div style={S.title}>Inventory Management</div>
-      <div style={S.sub}>Parts aur items manage karo</div>
+      <div style={S.sub}>Manages parts and supplier</div>
 
       <div style={S.card}>
         <div style={S.toolbar}>
@@ -46,7 +46,7 @@ export default function InventoryPage() {
           />
           <button
             style={S.btn("#3b82f6")}
-            onClick={() => setShowModal(true)} // ← modal kholo
+            onClick={() => setShowModal(true)} 
           >
             + Add Part
           </button>

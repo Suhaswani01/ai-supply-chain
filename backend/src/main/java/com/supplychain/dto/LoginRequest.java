@@ -9,9 +9,9 @@ public class LoginRequest {
 	  
 	@Email(message="Enter valid email")
 	@NotBlank(message ="Enter required email")
-     private String Email;
+     private String email;
 	
 	@NotBlank(message="Enter the password")
-	private String Password;
+	private String password;
 
 }

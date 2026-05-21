@@ -22,9 +22,8 @@ export default function AddPartModal({ show, onClose, onAdd }) {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
-  const [suppliers, setSuppliers] = useState([]);  // ← suppliers list
+  const [suppliers, setSuppliers] = useState([]);
 
-  // Suppliers fetch karo jab modal khule
   useEffect(() => {
     if (show) {
       getAllSuppliers()
@@ -40,7 +39,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
   };
 
   const handleSubmit = async () => {
-    // Validation
     if (!form.name || !form.partCode || !form.quantity) {
       setError("Name, Part Code aur Quantity zaroori hai!");
       return;
@@ -65,7 +63,12 @@ export default function AddPartModal({ show, onClose, onAdd }) {
       setForm(emptyForm);
       onClose();
     } catch (err) {
-      setError("Part add nahi hua! Backend check karo.");
+      const msg = err.response?.data?.message || err.response?.data || "";
+      if (msg.toString().includes("already exists")) {
+        setError("Yeh Part Code pehle se exist karta hai!");
+      } else {
+        setError("Part add nahi hua! Backend check karo.");
+      }
     } finally {
       setSaving(false);
     }
@@ -84,7 +87,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
 
         {error && <div style={S.error}>{error}</div>}
 
-        {/* Row 1 — Name + Part Code */}
         <div style={S.row2}>
           <div>
             <label style={S.label}>Part Name *</label>
@@ -100,7 +102,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
           </div>
         </div>
 
-        {/* Row 2 — Category + Quantity */}
         <div style={S.row2}>
           <div>
             <label style={S.label}>Category</label>
@@ -116,7 +117,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
           </div>
         </div>
 
-        {/* Row 3 — Price + Stock Status */}
         <div style={S.row2}>
           <div>
             <label style={S.label}>Unit Price (₹)</label>
@@ -135,7 +135,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
           </div>
         </div>
 
-        {/* Supplier Dropdown ← Yahan magic hai */}
         <div>
           <label style={S.label}>Supplier *</label>
           <select style={S.input} name="supplierId"
@@ -149,7 +148,6 @@ export default function AddPartModal({ show, onClose, onAdd }) {
           </select>
         </div>
 
-        {/* Buttons */}
         <div style={S.btns}>
           <button style={S.btn("#ffffff15")} onClick={handleClose}>
             Cancel

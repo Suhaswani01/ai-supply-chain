@@ -4,20 +4,20 @@ import { useSuppliers } from "../../hooks/useSuppliers";
 import AddSupplierModal from "../../components/admin/AddSupplierModal";
 
 const S = {
-  title: { fontSize: 20, fontWeight: 500, color: "white", marginBottom: 4 },
-  sub: { fontSize: 13, color: "#ffffff60", marginBottom: 20 },
-  card: { background: "#1a1f2e", border: "0.5px solid #ffffff15", borderRadius: 12, padding: 18 },
+  title: { fontSize: 20, fontWeight: 500, color: "black", marginBottom: 4 },
+  sub: { fontSize: 13, color: "#10030360", marginBottom: 20 },
+  card: { background: "#ffffff", border: "0.5px solid #10080815", borderRadius: 12, padding: 18 },
   toolbar: { display: "flex", justifyContent: "space-between", marginBottom: 16 },
-  search: { background: "#0f1117", border: "0.5px solid #ffffff30", borderRadius: 6, padding: "6px 12px", color: "white", fontSize: 12, width: 220 },
+  search: { background: "#fff7f7", border: "0.5px solid #10010130", borderRadius: 6, padding: "6px 12px", color: "black", fontSize: 12, width: 220 },
   btn: (bg) => ({ background: bg, color: "white", border: "none", padding: "6px 14px", borderRadius: 6, fontSize: 12, cursor: "pointer" }),
-  th: { textAlign: "left", padding: "8px 12px", color: "#ffffff60", fontSize: 11, fontWeight: 500, borderBottom: "0.5px solid #ffffff15" },
-  td: { padding: "10px 12px", color: "white", fontSize: 12, borderBottom: "0.5px solid #ffffff10" },
+  th: { textAlign: "left", padding: "8px 12px", color: "#03000060", fontSize: 11, fontWeight: 500, borderBottom: "0.5px solid #ffffff15" },
+  td: { padding: "10px 12px", color: "black", fontSize: 12, borderBottom: "0.5px solid #0b020210" },
 };
 
 export default function SuppliersPage() {
   const { suppliers, loading, handleAdd, handleDelete } = useSuppliers();
   const [search, setSearch] = useState("");
-  const [showModal, setShowModal] = useState(false);  // ← modal state
+  const [showModal, setShowModal] = useState(false);  
 
   const filtered = suppliers.filter(s =>
     s.name.toLowerCase().includes(search.toLowerCase())
@@ -26,7 +26,7 @@ export default function SuppliersPage() {
   return (
     <AdminLayout>
       <div style={S.title}>Suppliers</div>
-      <div style={S.sub}>Supplier list manage karo</div>
+      <div style={S.sub}>Supplier list manage</div>
 
       <div style={S.card}>
         <div style={S.toolbar}>
@@ -39,7 +39,7 @@ export default function SuppliersPage() {
         </div>
 
         {loading ? (
-          <div style={{ color: "#ffffff60", padding: 20, textAlign: "center" }}>Loading...</div>
+          <div style={{ color: "#00000060", padding: 20, textAlign: "center" }}>Loading...</div>
         ) : (
           <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
@@ -63,7 +63,7 @@ export default function SuppliersPage() {
                     </span>
                   </td>
                   <td style={S.td}>
-                    <button style={{ ...S.btn("#3b82f6"), marginRight: 6, padding: "4px 10px" }}>Edit</button>
+                    
                     <button style={{ ...S.btn("#ef4444"), padding: "4px 10px" }}
                       onClick={() => handleDelete(s.id)}>Delete</button>
                   </td>

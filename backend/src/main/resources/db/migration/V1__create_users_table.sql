@@ -9,3 +9,7 @@ INSERT INTO users (email, password, role) VALUES
 ('admin@test.com',
  '121166top',
  'ROLE_ADMIN');
+ INSERT INTO users (email, password, role) VALUES
+('manager@test.com',
+ '$2a$12$tQNOR/ZMbSuE5QmJxzLnzuL5FBWmMRKAMkGEbGnGwFJlLzCuHAEWO',
+ 'ROLE_INVENTORY_MANAGER');

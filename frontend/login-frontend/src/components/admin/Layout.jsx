@@ -2,9 +2,9 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 
 const S = {
-  container: { display: "flex", minHeight: "100vh", background: "#0f1117" },
+  container: { display: "flex", minHeight: "100vh", background: "#ffffff" },
   main: { flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" },
-  content: { flex: 1, overflowY: "auto", padding: 24 },
+  content: { flex: 1, overflowY: "auto", padding:18 },
 };
 
 export default function AdminLayout({ children }) {

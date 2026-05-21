@@ -19,7 +19,7 @@ export const useAuth = () => {
       else navigate("/viewer/dashboard");
 
     } catch (err) {
-      setError("Email ya password galat hai");
+      setError("something  is wrong ");
     } finally {
       setLoading(false);
     }

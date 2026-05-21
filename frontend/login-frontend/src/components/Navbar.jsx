@@ -1,28 +1,55 @@
 import { useNavigate } from "react-router-dom";
-import { logout, getRole } from "../services/authService";
+import { getRole, logout } from "../services/authService";
 
-const S = {
-  navbar: { background: "#0d1b2a", borderBottom: "0.5px solid #ffffff15", padding: "0 24px", height: 52, display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 12, flexShrink: 0 },
-  badge: { background: "#1e3a5f", color: "#60a5fa", fontSize: 11, padding: "3px 10px", borderRadius: 20, border: "0.5px solid #3b82f640" },
-  email: { fontSize: 13, color: "#ffffffa0" },
-  dot: { width: 8, height: 8, borderRadius: "50%", background: "#4ade80" },
-  logout: { background: "transparent", border: "0.5px solid #ffffff30", color: "#ffffffa0", padding: "5px 14px", borderRadius: 6, fontSize: 12, cursor: "pointer" },
+const ROLE_LABEL = {
+  ROLE_ADMIN:             "Admin",
+  ROLE_INVENTORY_MANAGER: "Manager",
+  ROLE_VIEWER:            "Viewer",
 };
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const role = getRole();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
+  let email = "";
+  try {
+    const token = localStorage.getItem("token");
+    if (token) email = JSON.parse(atob(token.split(".")[1])).sub || "";
+  } catch (_) {}
 
   return (
-    <div style={S.navbar}>
-      <span style={S.badge}>{getRole()}</span>
-      <span style={S.email}>suhas@admin.com</span>
-      <div style={S.dot} />
-      <button style={S.logout} onClick={handleLogout}>Logout</button>
+    <div style={{
+      height: 52,
+      background: "#0d1f3c",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-end",
+      padding: "0 10px",
+      gap: 12,
+      borderBottom: "0.5px solid rgba(255,255,255,0.06)",
+      flexShrink: 0,
+    }}>
+      <span style={{ fontSize: 12, color: "rgba(255,255,255,0.45)" }}>
+        {email}
+      </span>
+      <span style={{
+        fontSize: 11, padding: "3px 10px", borderRadius: 20,
+        background: "rgba(74,222,128,0.15)", color: "#4ade80",
+        border: "0.5px solid rgba(74,222,128,0.25)", fontWeight: 500,
+      }}>
+        {ROLE_LABEL[role]}
+      </span>
+      <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#4ade80" }} />
+      <button
+        onClick={() => { logout(); navigate("/"); }}
+        style={{
+          background: "rgba(255,255,255,0.08)",
+          border: "0.5px solid rgba(255,255,255,0.18)",
+          color: "rgba(255,255,255,0.75)",
+          padding: "5px 14px", borderRadius: 6,
+          fontSize: 12, cursor: "pointer",
+        }}
+      >Logout</button>
     </div>
   );
 }

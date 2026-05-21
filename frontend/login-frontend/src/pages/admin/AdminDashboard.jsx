@@ -3,20 +3,27 @@ import { usePurchaseOrders } from "../../hooks/usePurchaseOrders";
 import AdminLayout from "../../components/admin/Layout";
 
 const S = {
-  title: { fontSize: 22, fontWeight: 500, color: "white", marginBottom: 4 },
-  sub: { fontSize: 13, color: "#ffffff60", marginBottom: 24 },
+  title: { fontSize: 22, fontWeight: 600, color: "#000000", marginBottom: 4 },
+  sub: { fontSize: 13, color: "#000000", marginBottom: 24 },
   statsGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 24 },
-  statCard: { background: "#1a1f2e", border: "0.5px solid #ffffff15", borderRadius: 10, padding: 16 },
-  statLabel: { fontSize: 11, color: "#ffffff60", marginBottom: 6 },
-  statValue: { fontSize: 24, fontWeight: 500, color: "white" },
+  statCard: {
+    background: "#ffffff", border: "0.5px solid #000000",
+    borderRadius: 10, padding: 16,
+    borderTop: "3px solid #acb7d8",
+  },
+  statLabel: { fontSize: 11, color: "#010205", marginBottom: 6, textTransform: "uppercase", letterSpacing: 0.8 },
+  statValue: { fontSize: 24, fontWeight: 600, color: "#000000" },
   statSub: { fontSize: 11, marginTop: 4 },
   grid2: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 },
-  card: { background: "#1a1f2e", border: "0.5px solid #ffffff15", borderRadius: 12, padding: 18, marginBottom: 16 },
-  cardTitle: { fontSize: 14, fontWeight: 500, color: "white", marginBottom: 14 },
-  row: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0", borderBottom: "0.5px solid #ffffff10", fontSize: 12 },
+  card: {
+    background: "#ffffff", border: "1px solid #000000",
+    borderRadius: 12, padding: 18, marginBottom: 16,
+  },
+  cardTitle: { fontSize: 14, fontWeight: 600, color: "#000000", marginBottom: 14 },
+  row: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 0", borderBottom: "0.5px solid #1e2433", fontSize: 12 },
   badge: (color, bg) => ({ fontSize: 10, padding: "2px 8px", borderRadius: 4, color, background: bg }),
   btn: (bg) => ({ background: bg, color: "white", border: "none", padding: "4px 10px", borderRadius: 4, fontSize: 11, cursor: "pointer", marginLeft: 4 }),
-  barWrap: { flex: 1, background: "#ffffff15", borderRadius: 4, height: 4, margin: "0 10px" },
+  barWrap: { flex: 1, background: "#ffffff", borderRadius: 4, height: 4, margin: "0 10px" },
 };
 
 const stockColor = (status) => {
@@ -44,7 +51,7 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
       <div style={S.title}>Admin dashboard</div>
-      <div style={S.sub}>Welcome back, Suhas — full system access</div>
+      
 
       {/* Stats */}
       <div style={S.statsGrid}>
@@ -74,21 +81,21 @@ export default function AdminDashboard() {
       <div style={S.grid2}>
         {/* Left Column */}
         <div>
-          {/* Inventory Quick View */}
+          {/* Inventory VIew */}
           <div style={S.card}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
-              <div style={S.cardTitle}>Inventory quick view</div>
-              <button style={{ ...S.btn("#3b82f6"), marginLeft: 0 }}>+ Add part</button>
+              <div style={S.cardTitle}>Inventory  view</div>
+              <button style={{ ...S.btn("#060708"), marginLeft: 0 }}>+ Add part</button>
             </div>
             {partsLoading ? (
-              <div style={{ color: "#ffffff60", fontSize: 13 }}>Loading...</div>
+              <div style={{ color: "#00000060", fontSize: 13 }}>Loading...</div>
             ) : (
               parts.slice(0, 4).map(part => {
                 const { color, bg } = stockColor(part.stockStatus);
                 return (
                   <div key={part.id} style={S.row}>
-                    <span style={{ color: "white", width: 90, fontSize: 12 }}>{part.name.substring(0, 8)}...</span>
-                    <span style={{ color: "#ffffff60", fontSize: 11 }}>Qty:{part.quantity}</span>
+                    <span style={{ color: "#00000060", width: 90, fontSize: 12 }}>{part.name.substring(0, 8)}...</span>
+                    <span style={{ color: "#07010160", fontSize: 11 }}>Qty:{part.quantity}</span>
                     <div style={S.barWrap}>
                       <div style={{ width: `${barWidth(part.quantity)}%`, background: barColor(part.stockStatus), height: "100%", borderRadius: 4 }} />
                     </div>
@@ -119,11 +126,11 @@ export default function AdminDashboard() {
                 <div key={i}>
                   <div style={{ fontSize: 11, color: "#ffffff60", marginBottom: 4 }}>{field.label}</div>
                   {field.type === "select" ? (
-                    <select style={{ width: "100%", background: "#0f1117", border: "0.5px solid #ffffff30", borderRadius: 6, padding: "6px 8px", color: "white", fontSize: 12 }}>
+                    <select style={{ width: "100%", background: "#f8faff", border: "0.5px solid #00000030", borderRadius: 6, padding: "6px 8px", color: "black", fontSize: 12 }}>
                       {field.options.map(o => <option key={o}>{o}</option>)}
                     </select>
                   ) : (
-                    <input defaultValue={field.value} style={{ width: "100%", background: "#0f1117", border: "0.5px solid #ffffff30", borderRadius: 6, padding: "6px 8px", color: "white", fontSize: 12, boxSizing: "border-box" }} />
+                    <input defaultValue={field.value} style={{ width: "100%", background: "#ffffff", border: "0.5px solid #00000030", borderRadius: 6, padding: "6px 8px", color: "black", fontSize: 12, boxSizing: "border-box" }} />
                   )}
                 </div>
               ))}
@@ -142,9 +149,9 @@ export default function AdminDashboard() {
               )}
             </div>
             {posLoading ? (
-              <div style={{ color: "#ffffff60", fontSize: 13 }}>Loading...</div>
+              <div style={{ color: "#00000060", fontSize: 13 }}>Loading...</div>
             ) : pendingPOs.length === 0 ? (
-              <div style={{ color: "#ffffff60", fontSize: 13 }}>Koi pending PO nahi hai</div>
+              <div style={{ color: "#06010160", fontSize: 13 }}>NO PENDING PURCHASE ORDER</div>
             ) : (
               pendingPOs.map(po => (
                 <div key={po.id} style={S.row}>

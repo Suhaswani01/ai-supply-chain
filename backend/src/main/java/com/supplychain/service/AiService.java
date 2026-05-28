@@ -184,7 +184,7 @@ public class AiService {
         return callGroq(prompt);
     }
 
-    // ── Groq API Call ────────────────────────────────────────────────────────
+    
     private String callGroq(String prompt) {
         try {
             HttpHeaders headers = new HttpHeaders();

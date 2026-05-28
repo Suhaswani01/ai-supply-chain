@@ -52,4 +52,10 @@ public class PurchaseOrderController {
     public ResponseEntity<PurchaseOrder> rejectPO(@PathVariable Long id) {
         return ResponseEntity.ok(purchaseOrderService.rejectPO(id));
     }
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deletePO(@PathVariable Long id) {
+        purchaseOrderService.deletePO(id);
+        return ResponseEntity.noContent().build();
+    }
 }

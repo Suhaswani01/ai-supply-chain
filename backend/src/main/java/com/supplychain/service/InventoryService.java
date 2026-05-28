@@ -1,19 +1,23 @@
 package com.supplychain.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.supplychain.entity.Part;
 import com.supplychain.entity.Part.StockStatus;
 import com.supplychain.repository.PartRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import com.supplychain.repository.PurchaseOrderRepository;
 
-import java.util.List;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class InventoryService {
 
-    private final PartRepository partRepository;
-
+    private final PartRepository partRepository; 
+    private final PurchaseOrderRepository purchaseOrderRepository;
     public List<Part> getAllParts() {
         return partRepository.findAll();
     }
@@ -41,8 +45,10 @@ public class InventoryService {
         updateStockStatus(existing);
         return partRepository.save(existing);
     }
-
+  
+    @Transactional
     public void deletePart(Long id) {
+    	 purchaseOrderRepository.deleteByPartId(id);
         partRepository.deleteById(id);
     }
 

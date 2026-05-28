@@ -40,11 +40,11 @@ export default function AddPartModal({ show, onClose, onAdd }) {
 
   const handleSubmit = async () => {
     if (!form.name || !form.partCode || !form.quantity) {
-      setError("Name, Part Code aur Quantity zaroori hai!");
+      setError("Name, Part Code aur and qunatity is needd");
       return;
     }
     if (!form.supplierId) {
-      setError("Supplier select karo!");
+      setError("select supplier first!");
       return;
     }
 
@@ -65,9 +65,9 @@ export default function AddPartModal({ show, onClose, onAdd }) {
     } catch (err) {
       const msg = err.response?.data?.message || err.response?.data || "";
       if (msg.toString().includes("already exists")) {
-        setError("Yeh Part Code pehle se exist karta hai!");
+        setError("this parts is already exist!");
       } else {
-        setError("Part add nahi hua! Backend check karo.");
+        setError("pard not  added ");
       }
     } finally {
       setSaving(false);
@@ -139,7 +139,7 @@ export default function AddPartModal({ show, onClose, onAdd }) {
           <label style={S.label}>Supplier *</label>
           <select style={S.input} name="supplierId"
             value={form.supplierId} onChange={handleChange}>
-            <option value="">-- Supplier Select Karo --</option>
+            <option value="">-- Select supplier --</option>
             {suppliers.map(s => (
               <option key={s.id} value={s.id}>
                 {s.name} — {s.status}

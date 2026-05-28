@@ -97,11 +97,11 @@ npm start
 
 ### Default Login
 Email    : admin@test.com
-Password : password123
+Password : password
 
 ### Default Login for manager
 Email    : manager@test.com
-Password : password123
+Password : password
 
 
 
